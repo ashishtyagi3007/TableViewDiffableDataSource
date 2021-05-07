@@ -71,16 +71,12 @@ class ViewController: UIViewController {
     
     // MARK:- outlets & objc functions
     @IBAction func shuffleButtonPressed(_ sender: Any) {
-//        for i in 0 ..< self.charactersData.count {
-//            self.charactersData[i].comicCharacters = charactersData[i].comicCharacters.shuffled()
-//        }
-//
-//
-//        self.charactersData = charactersData.map {
-//            $0
-//        }.shuffled()
         
-        self.charactersData =  self.charactersData.shuffled()
+        for i in 0 ..< self.charactersData.count {
+            self.charactersData[i].comicCharacters = charactersData[i].comicCharacters.shuffled()
+        }
+        
+      // self.charactersData =  self.charactersData.shuffled()
         
         self.applySnapshot(animated: true)
     }
@@ -104,23 +100,26 @@ extension ViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
+
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 68))
         headerView.backgroundColor = UIColor.systemBackground
-        
+
         let sectionLabel = UILabel()
+
+        //if charactersData[section].type.rawValue ==
         sectionLabel.text = charactersData[section].type.rawValue
         sectionLabel.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
         sectionLabel.frame = CGRect(x: 24, y: 34 - sectionLabel.intrinsicContentSize.height / 2, width: sectionLabel.intrinsicContentSize.width + 12, height: sectionLabel.intrinsicContentSize.height)
-        
+
         headerView.addSubview(sectionLabel)
         return headerView
     }
+
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 68
     }
-    
+        
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 //        // Get selected hero using index path
